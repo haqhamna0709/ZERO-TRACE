@@ -1,0 +1,133 @@
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            #15344b 0%,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            #29204d 0%,
+            transparent 35%
+        ),
+        #080D18;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 450px;
+    padding: 45px 35px;
+
+    background: rgba(16, 24, 39, 0.85);
+    border: 1px solid rgba(54, 217, 255, 0.25);
+    border-radius: 18px;
+
+    box-shadow: 0 0 45px rgba(54, 217, 255, 0.08);
+    backdrop-filter: blur(15px);
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 4px;
+}
+
+.logo span {
+    color: var(--cyan);
+}
+
+.logo small {
+    color: var(--purple);
+}
+
+.system-label {
+    color: var(--cyan);
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-top: 12px;
+}
+
+.login-card h1 {
+    font-size: 23px;
+    text-align: center;
+    margin-top: 35px;
+}
+
+.subtitle {
+    color: var(--muted);
+    text-align: center;
+    font-size: 13px;
+    margin: 12px 0 30px;
+}
+
+.login-card label {
+    display: block;
+    font-size: 13px;
+    margin: 18px 0 9px;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 14px;
+    color: white;
+    background: #080D18;
+    border: 1px solid #29364B;
+    border-radius: 8px;
+    outline: none;
+}
+
+.login-card input:focus {
+    border-color: var(--cyan);
+    box-shadow: 0 0 10px #36d9ff30;
+}
+
+.login-card button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+
+    color: #080D18;
+    background: var(--cyan);
+    border: none;
+    border-radius: 8px;
+
+    font-weight: 800;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.login-card button:hover {
+    background: white;
+    box-shadow: 0 0 25px #36d9ff80;
+    transform: translateY(-2px);
+}
+
+.register-text,
+.footer-text {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 25px;
+}
+
+.footer-text {
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin-top: 35px;
+}
+
+#message {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 15px;
+}
