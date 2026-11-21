@@ -1,32 +1,30 @@
 
-@media (max-width: 520px) {
+/* ZERO TRACE GLOBAL RESPONSIVENESS */
 
-    .auth-wrapper {
-        padding: 20px 14px;
-    }
+@media (max-width: 480px) {
 
     .auth-card {
-        padding: 30px 22px;
+        padding: 26px 18px;
     }
 
-    .brand h1 {
-        font-size: 24px;
+    .auth-footer {
+        font-size: 8px;
     }
 
-    .heading h2 {
-        font-size: 18px;
-    }
-
-    .side-caption {
-        display: none;
+    .form-group input {
+        height: 46px;
     }
 
 }
 
-@media (max-height: 650px) {
+@media (prefers-reduced-motion: reduce) {
 
-    .auth-wrapper {
-        align-items: flex-start;
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 
 }

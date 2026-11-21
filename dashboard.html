@@ -3,87 +3,483 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ZERO TRACE | Dashboard</title>
+    <title>ZERO TRACE | Command Center</title>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="responsive.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 
-<body>
+<body class="dashboard-body">
 
-    <main class="dashboard-container">
+    <div class="background-grid"></div>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-icon">Z</div>
+
+            <div>
+                <h2>ZERO<span>TRACE</span></h2>
+                <p>INVESTIGATION SYSTEM</p>
+            </div>
+
+        </div>
+
+        <div class="nav-heading">MAIN MENU</div>
+
+        <nav class="navigation">
+
+            <a href="#overview" class="nav-link active">
+                <span>◈</span> Overview
+            </a>
+
+            <a href="#missions" class="nav-link">
+                <span>▣</span> Case Files
+            </a>
+
+            <a href="#evidence" class="nav-link">
+                <span>⌕</span> Evidence Room
+            </a>
+
+            <a href="#achievements" class="nav-link">
+                <span>✧</span> Achievements
+            </a>
+
+            <a href="#activity" class="nav-link">
+                <span>◷</span> Activity Log
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-status">
+                <span class="status-dot"></span>
+                ALL SYSTEMS ONLINE
+            </div>
+
+            <button id="logoutBtn" class="logout-btn">
+                ⇥ LOG OUT
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content" id="overview">
+
+        <!-- TOPBAR -->
 
         <header class="topbar">
 
-            <h1>ZERO<span>TRACE</span>_</h1>
+            <button id="menuToggle" class="menu-toggle">
+                ☰
+            </button>
 
-            <button id="logoutBtn">LOGOUT ↗</button>
+            <div class="topbar-title">
+
+                <p>COMMAND CENTER / OVERVIEW</p>
+
+                <h2>Investigation Dashboard</h2>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="online-indicator">
+                    <span class="status-dot"></span>
+                    ONLINE
+                </div>
+
+                <div class="topbar-profile">
+
+                    <div class="avatar" id="topAvatar">I</div>
+
+                    <div>
+                        <h4 id="topUsername">Investigator</h4>
+                        <p>ACTIVE AGENT</p>
+                    </div>
+
+                </div>
+
+            </div>
 
         </header>
 
-        <section class="welcome-card">
 
-            <p class="system-label">
-                INVESTIGATION CONTROL CENTER
-            </p>
+        <!-- WELCOME BANNER -->
 
-            <h2>
-                Welcome, <span id="playerName">Investigator</span>
-            </h2>
+        <section class="welcome-banner">
 
-            <p>Your investigation journey starts here.</p>
+            <div class="welcome-content">
+
+                <p class="eyebrow">
+                    <span class="status-dot"></span>
+                    INVESTIGATOR CONTROL CENTER
+                </p>
+
+                <h1>
+                    Welcome back,
+                    <span id="welcomeName">Investigator</span>
+                </h1>
+
+                <p>
+                    Every clue matters. Every trace tells a story.
+                    Your next investigation awaits.
+                </p>
+
+                <a href="#missions" class="banner-btn">
+                    EXPLORE MISSIONS →
+                </a>
+
+            </div>
+
+            <div class="welcome-decoration">
+
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <div class="orbit orbit-three"></div>
+
+                <div class="center-symbol">Z</div>
+
+            </div>
 
         </section>
+
+
+        <!-- PLAYER LEVEL -->
+
+        <section class="level-panel">
+
+            <div class="level-info">
+
+                <div class="level-avatar" id="levelAvatar">
+                    I
+                </div>
+
+                <div>
+
+                    <p class="small-label">CURRENT INVESTIGATOR RANK</p>
+
+                    <h3 id="rankName">ROOKIE INVESTIGATOR</h3>
+
+                    <p class="level-number">
+                        LEVEL <span id="playerLevel">01</span>
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="xp-section">
+
+                <div class="xp-labels">
+
+                    <span>EXPERIENCE PROGRESS</span>
+
+                    <span id="xpText">0 / 500 XP</span>
+
+                </div>
+
+                <div class="xp-track">
+
+                    <div class="xp-fill" id="xpFill"></div>
+
+                </div>
+
+                <p id="xpRemaining">
+                    500 XP remaining until next level
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- STATISTICS -->
 
         <section class="stats-grid">
 
             <article class="stat-card">
-                <p>PLAYER LEVEL</p>
-                <h3 id="playerLevel">01</h3>
+
+                <div class="stat-icon cyan">◈</div>
+
+                <p>TOTAL EXPERIENCE</p>
+
+                <h2 id="totalXP">0</h2>
+
+                <span>XP EARNED</span>
+
             </article>
 
             <article class="stat-card">
-                <p>TOTAL XP</p>
-                <h3 id="playerXP">0</h3>
+
+                <div class="stat-icon purple">▣</div>
+
+                <p>COMPLETED CASES</p>
+
+                <h2 id="completedCases">0</h2>
+
+                <span>INVESTIGATIONS SOLVED</span>
+
             </article>
 
             <article class="stat-card">
-                <p>CASES COMPLETED</p>
-                <h3 id="completedCases">0</h3>
+
+                <div class="stat-icon green">⌕</div>
+
+                <p>COLLECTED EVIDENCE</p>
+
+                <h2 id="evidenceCount">0</h2>
+
+                <span>EVIDENCE ITEMS</span>
+
+            </article>
+
+            <article class="stat-card">
+
+                <div class="stat-icon orange">✧</div>
+
+                <p>ACHIEVEMENTS</p>
+
+                <h2 id="achievementCount">0</h2>
+
+                <span>REWARDS UNLOCKED</span>
+
             </article>
 
         </section>
 
-        <section class="mission-card">
 
-            <h2>YOUR FIRST MISSION</h2>
+        <!-- MISSIONS -->
 
-            <p>CASE 001 — THE MISSING IDENTITY</p>
+        <section class="content-section" id="missions">
 
-            <p class="mission-description">
-                Your first investigation awaits.
-                Analyze the fictional evidence and solve the case.
+            <div class="section-heading">
+
+                <div>
+                    <p class="small-label">YOUR NEXT CHALLENGE</p>
+                    <h2>Active Investigations</h2>
+                </div>
+
+                <a href="#missions">VIEW ALL →</a>
+
+            </div>
+
+            <div class="mission-grid">
+
+                <article class="mission-card">
+
+                    <div class="mission-top">
+
+                        <span class="case-number">CASE 001</span>
+
+                        <span class="difficulty easy">BEGINNER</span>
+
+                    </div>
+
+                    <div class="mission-symbol cyan-symbol">
+                        ◈
+                    </div>
+
+                    <h3>The Missing Identity</h3>
+
+                    <p>
+                        Investigate a fictional identity report
+                        by connecting digital clues.
+                    </p>
+
+                    <div class="mission-footer">
+
+                        <span>REWARD: 250 XP</span>
+
+                        <button class="mission-button" data-case="case001">
+                            START →
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <article class="mission-card">
+
+                    <div class="mission-top">
+
+                        <span class="case-number">CASE 002</span>
+
+                        <span class="difficulty easy">BEGINNER</span>
+
+                    </div>
+
+                    <div class="mission-symbol purple-symbol">
+                        ▣
+                    </div>
+
+                    <h3>The Silent Server</h3>
+
+                    <p>
+                        Review fictional server records
+                        and discover the cause of an outage.
+                    </p>
+
+                    <div class="mission-footer">
+
+                        <span>REWARD: 350 XP</span>
+
+                        <button class="mission-button" disabled>
+                            LOCKED
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <article class="mission-card">
+
+                    <div class="mission-top">
+
+                        <span class="case-number">CASE 003</span>
+
+                        <span class="difficulty medium">INTERMEDIATE</span>
+
+                    </div>
+
+                    <div class="mission-symbol orange-symbol">
+                        ⌕
+                    </div>
+
+                    <h3>The Encrypted Message</h3>
+
+                    <p>
+                        Solve logic and encoding puzzles
+                        to reveal a hidden message.
+                    </p>
+
+                    <div class="mission-footer">
+
+                        <span>REWARD: 500 XP</span>
+
+                        <button class="mission-button" disabled>
+                            LOCKED
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- LOWER DASHBOARD -->
+
+        <section class="lower-grid">
+
+            <article class="activity-panel" id="activity">
+
+                <div class="section-heading">
+
+                    <div>
+                        <p class="small-label">PLAYER HISTORY</p>
+                        <h2>Recent Activity</h2>
+                    </div>
+
+                </div>
+
+                <div id="activityList" class="activity-list">
+
+                    <!-- JavaScript loads activities here -->
+
+                </div>
+
+            </article>
+
+
+            <article class="achievement-panel" id="achievements">
+
+                <div class="section-heading">
+
+                    <div>
+                        <p class="small-label">YOUR REWARDS</p>
+                        <h2>Achievements</h2>
+                    </div>
+
+                </div>
+
+                <div id="achievementList">
+
+                    <!-- JavaScript loads achievements here -->
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- EVIDENCE PREVIEW -->
+
+        <section class="content-section evidence-preview" id="evidence">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="small-label">INVESTIGATION RECORDS</p>
+                    <h2>Evidence Room</h2>
+                </div>
+
+            </div>
+
+            <p>
+                Your collected evidence will appear here as you
+                complete investigations.
             </p>
 
-            <button id="startMission">
-                START INVESTIGATION →
-            </button>
+            <div class="evidence-count">
+                <span>⌕</span>
+                <strong id="evidencePreviewCount">0</strong>
+                <small>FILES COLLECTED</small>
+            </div>
 
         </section>
 
-        <footer>
-            ZERO TRACE © 2026 | INVESTIGATION SYSTEM
+
+        <footer class="dashboard-footer">
+
+            ZERO TRACE © 2026
+
+            <span>ALL INVESTIGATIONS ARE SIMULATED</span>
+
         </footer>
 
     </main>
 
+
     <script src="storage.js"></script>
+    <script src="app.js"></script>
     <script src="dashboard.js"></script>
 
 </body>
+
 </html>

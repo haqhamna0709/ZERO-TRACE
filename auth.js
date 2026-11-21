@@ -1,14 +1,29 @@
 
+/* =================================
+   ZERO TRACE - AUTHENTICATION
+================================= */
+
 const loginSection = document.getElementById("loginSection");
 const registerSection = document.getElementById("registerSection");
-
-const message = document.getElementById("message");
 
 const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 
+const message = document.getElementById("message");
+
 const showRegister = document.getElementById("showRegister");
 const showLogin = document.getElementById("showLogin");
+
+
+// CHECK EXISTING SESSION
+
+const existingUser = Storage.getSession();
+
+if (existingUser && Storage.getPlayer(existingUser)) {
+
+    window.location.replace("dashboard.html");
+
+}
 
 
 // SWITCH TO REGISTRATION
@@ -18,8 +33,7 @@ showRegister.addEventListener("click", () => {
     loginSection.classList.add("hidden");
     registerSection.classList.remove("hidden");
 
-    message.textContent = "";
-    message.className = "";
+    clearMessage();
 
 });
 
@@ -31,13 +45,30 @@ showLogin.addEventListener("click", () => {
     registerSection.classList.add("hidden");
     loginSection.classList.remove("hidden");
 
-    message.textContent = "";
-    message.className = "";
+    clearMessage();
 
 });
 
 
-// CREATE ACCOUNT
+// MESSAGE SYSTEM
+
+function showMessage(text, error = false) {
+
+    message.textContent = text;
+
+    message.className = error ? "error" : "";
+
+}
+
+function clearMessage() {
+
+    message.textContent = "";
+    message.className = "";
+
+}
+
+
+// REGISTRATION
 
 registerForm.addEventListener("submit", async (event) => {
 
@@ -55,19 +86,36 @@ registerForm.addEventListener("submit", async (event) => {
         .getElementById("confirmPassword")
         .value;
 
-    if (username.length < 3) {
-        showMessage("Username must contain at least 3 characters.", true);
+    const usernamePattern = /^[a-zA-Z0-9_]{3,20}$/;
+
+    if (!usernamePattern.test(username)) {
+
+        showMessage(
+            "Username must be 3-20 characters using letters, numbers or underscores.",
+            true
+        );
+
         return;
+
     }
 
-    if (password.length < 6) {
-        showMessage("Password must contain at least 6 characters.", true);
+    if (password.length < 8) {
+
+        showMessage(
+            "Password must contain at least 8 characters.",
+            true
+        );
+
         return;
+
     }
 
     if (password !== confirmPassword) {
+
         showMessage("Passwords do not match.", true);
+
         return;
+
     }
 
     const accounts = Storage.getAccounts();
@@ -75,9 +123,17 @@ registerForm.addEventListener("submit", async (event) => {
     const accountKey = username.toLowerCase();
 
     if (accounts[accountKey]) {
+
         showMessage("Username already exists.", true);
+
         return;
+
     }
+
+    const submitButton = registerForm.querySelector("button");
+
+    submitButton.disabled = true;
+    submitButton.textContent = "CREATING ACCOUNT...";
 
     try {
 
@@ -89,47 +145,50 @@ registerForm.addEventListener("submit", async (event) => {
         );
 
         accounts[accountKey] = {
+
             username: username,
+
             salt: salt,
-            passwordHash: passwordHash
+
+            passwordHash: passwordHash,
+
+            createdAt: new Date().toISOString()
+
         };
 
         Storage.saveAccounts(accounts);
 
-        const player = {
-            username: username,
-            level: 1,
-            xp: 0,
-            completedCases: [],
-            unlockedCases: ["case001"],
-            collectedEvidence: [],
-            achievements: [],
-            createdAt: new Date().toISOString()
-        };
+        const player = createNewPlayer(username);
 
         Storage.savePlayer(player);
 
-        showMessage(
-            "ACCOUNT CREATED SUCCESSFULLY! Please login."
-        );
-
         registerForm.reset();
+
+        showMessage(
+            "ACCOUNT CREATED! You can now login."
+        );
 
         setTimeout(() => {
 
             registerSection.classList.add("hidden");
+
             loginSection.classList.remove("hidden");
 
-            message.textContent = "";
+            clearMessage();
 
-        }, 1200);
+        }, 1500);
 
     } catch (error) {
 
         showMessage(
-            "Unable to create account. Run using Live Server.",
+            "Registration failed. Please use Live Server.",
             true
         );
+
+    } finally {
+
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'CREATE ACCOUNT <span>→</span>';
 
     }
 
@@ -152,14 +211,20 @@ loginForm.addEventListener("submit", async (event) => {
 
     const accounts = Storage.getAccounts();
 
-    const accountKey = username.toLowerCase();
-
-    const account = accounts[accountKey];
+    const account = accounts[username.toLowerCase()];
 
     if (!account) {
+
         showMessage("Account not found.", true);
+
         return;
+
     }
+
+    const submitButton = loginForm.querySelector("button");
+
+    submitButton.disabled = true;
+    submitButton.textContent = "VERIFYING...";
 
     try {
 
@@ -169,8 +234,21 @@ loginForm.addEventListener("submit", async (event) => {
         );
 
         if (enteredHash !== account.passwordHash) {
+
             showMessage("Incorrect password.", true);
+
             return;
+
+        }
+
+        const player = Storage.getPlayer(account.username);
+
+        if (!player) {
+
+            showMessage("Player profile not found.", true);
+
+            return;
+
         }
 
         Storage.setSession(account.username);
@@ -178,24 +256,20 @@ loginForm.addEventListener("submit", async (event) => {
         showMessage("ACCESS GRANTED!");
 
         setTimeout(() => {
-            window.location.href = "dashboard.html";
+
+            window.location.replace("dashboard.html");
+
         }, 700);
 
     } catch (error) {
 
         showMessage("Login failed. Please try again.", true);
 
+    } finally {
+
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'ACCESS SYSTEM <span>→</span>';
+
     }
 
 });
-
-
-// MESSAGE FUNCTION
-
-function showMessage(text, error = false) {
-
-    message.textContent = text;
-
-    message.className = error ? "error" : "";
-
-}
