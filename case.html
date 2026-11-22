@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ZERO TRACE | Investigation</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="case.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="case-body">
+
+    <div class="case-container">
+
+        <!-- HEADER -->
+
+        <header class="case-header">
+
+            <a href="dashboard.html" class="case-logo">
+                ZERO<span>TRACE</span>_
+            </a>
+
+            <div class="case-header-right">
+
+                <span id="casePlayerName">INVESTIGATOR</span>
+
+                <a href="dashboard.html" class="back-button">
+                    ← DASHBOARD
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- CASE INTRODUCTION -->
+
+        <section class="case-hero">
+
+            <div class="case-label">
+                DIGITAL INVESTIGATION / CASE <span id="caseNumber">001</span>
+            </div>
+
+            <h1 id="caseTitle">The Missing Identity</h1>
+
+            <p id="caseDescription"></p>
+
+            <div class="case-meta">
+
+                <span id="caseDifficulty">BEGINNER</span>
+
+                <span id="caseReward">250 XP REWARD</span>
+
+            </div>
+
+        </section>
+
+
+        <!-- GAME LAYOUT -->
+
+        <div class="game-layout">
+
+            <!-- LEFT PANEL -->
+
+            <section class="game-panel briefing-panel">
+
+                <div class="panel-heading">
+                    <span>01</span>
+                    INVESTIGATION BRIEFING
+                </div>
+
+                <div id="briefingList"></div>
+
+                <div class="progress-information">
+
+                    <div>
+                        EVIDENCE COLLECTED
+                        <span id="evidenceProgress">0 / 3</span>
+                    </div>
+
+                    <div class="evidence-track">
+
+                        <div id="evidenceFill"></div>
+
+                    </div>
+
+                </div>
+
+                <h3 class="evidence-heading">RECOVERED EVIDENCE</h3>
+
+                <div id="evidenceList" class="evidence-list"></div>
+
+            </section>
+
+
+            <!-- RIGHT PANEL -->
+
+            <section class="game-panel puzzle-panel">
+
+                <div class="panel-heading">
+                    <span>02</span>
+                    ANALYSIS TERMINAL
+                </div>
+
+                <div class="terminal-label">
+                    <span class="status-dot"></span>
+                    INVESTIGATION ACTIVE
+                </div>
+
+                <div class="puzzle-icon">⌕</div>
+
+                <p class="question-label">INVESTIGATION QUESTION</p>
+
+                <h2 id="questionText"></h2>
+
+                <p class="question-instruction">
+                    Examine the recovered evidence before submitting your answer.
+                </p>
+
+                <form id="answerForm">
+
+                    <label for="answerInput">
+                        YOUR ANSWER
+                    </label>
+
+                    <input
+                        type="text"
+                        id="answerInput"
+                        placeholder="Enter your answer..."
+                        autocomplete="off"
+                        required
+                    >
+
+                    <button type="submit" id="submitAnswer">
+                        VERIFY ANSWER →
+                    </button>
+
+                </form>
+
+                <div id="gameMessage" class="game-message"></div>
+
+                <button id="hintButton" class="hint-button">
+                    ✧ REQUEST INVESTIGATION HINT
+                </button>
+
+                <div id="hintBox" class="hint-box hidden"></div>
+
+            </section>
+
+        </div>
+
+
+        <!-- COMPLETION SCREEN -->
+
+        <section id="completionScreen" class="completion-screen hidden">
+
+            <div class="completion-icon">✧</div>
+
+            <p class="completion-label">INVESTIGATION COMPLETED</p>
+
+            <h2>CASE SOLVED!</h2>
+
+            <p id="completionMessage"></p>
+
+            <div class="reward-display">
+
+                <span>EXPERIENCE EARNED</span>
+
+                <strong id="earnedXP">+250 XP</strong>
+
+            </div>
+
+            <div class="completion-actions">
+
+                <a href="dashboard.html" class="completion-button">
+                    RETURN TO DASHBOARD →
+                </a>
+
+                <button id="nextCaseButton" class="next-case-button">
+                    NEXT INVESTIGATION →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <footer class="case-footer">
+            ZERO TRACE © 2026 | SIMULATED INVESTIGATION ENVIRONMENT
+        </footer>
+
+    </div>
+
+
+    <script src="storage.js"></script>
+    <script src="cases.js"></script>
+    <script src="game.js"></script>
+
+</body>
+
+</html>
