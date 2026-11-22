@@ -1,14 +1,18 @@
 
-/* =================================
-   ZERO TRACE - DASHBOARD ENGINE
-================================= */
-
-
-// CHECK LOGIN SESSION
+/* =====================================
+   ZERO TRACE - ADVANCED DASHBOARD
+===================================== */
 
 const currentUser = Storage.getSession();
 
-if (!currentUser || !Storage.getPlayer(currentUser)) {
+let dashboardPlayer = currentUser
+    ? Storage.getPlayer(currentUser)
+    : null;
+
+
+// LOGIN PROTECTION
+
+if (!dashboardPlayer) {
 
     Storage.logout();
 
@@ -21,44 +25,39 @@ if (!currentUser || !Storage.getPlayer(currentUser)) {
 }
 
 
-// MAIN DASHBOARD FUNCTION
+// INITIALIZE
 
 function initializeDashboard() {
 
-    const player = Storage.getPlayer(currentUser);
+    dashboardPlayer = Storage.getPlayer(currentUser);
 
-    if (!player) return;
+    const totalXP = Number(
+        dashboardPlayer.totalXP ?? dashboardPlayer.xp ?? 0
+    );
 
-    // Calculate total XP
-    const totalXP = Number(player.totalXP ?? player.xp ?? 0);
-
-    // Calculate level
     const level = Math.floor(totalXP / 500) + 1;
 
-    // Calculate XP within current level
     const currentLevelXP = totalXP % 500;
 
     const remainingXP = 500 - currentLevelXP;
 
     const progress = (currentLevelXP / 500) * 100;
 
-
-    // UPDATE PLAYER INFORMATION
+    // PROFILE
 
     document.getElementById("welcomeName").textContent =
-        player.username;
+        dashboardPlayer.username;
 
     document.getElementById("topUsername").textContent =
-        player.username;
+        dashboardPlayer.username;
 
     document.getElementById("topAvatar").textContent =
-        player.username.charAt(0).toUpperCase();
+        dashboardPlayer.username.charAt(0).toUpperCase();
 
     document.getElementById("levelAvatar").textContent =
-        player.username.charAt(0).toUpperCase();
+        dashboardPlayer.username.charAt(0).toUpperCase();
 
-
-    // UPDATE LEVEL
+    // LEVEL
 
     document.getElementById("playerLevel").textContent =
         String(level).padStart(2, "0");
@@ -66,8 +65,7 @@ function initializeDashboard() {
     document.getElementById("rankName").textContent =
         getRank(level);
 
-
-    // UPDATE XP
+    // XP
 
     document.getElementById("totalXP").textContent =
         totalXP.toLocaleString();
@@ -81,36 +79,27 @@ function initializeDashboard() {
     document.getElementById("xpFill").style.width =
         `${progress}%`;
 
-
-    // UPDATE STATISTICS
-
-    const completed = player.completedCases || [];
-
-    const evidence = player.collectedEvidence || [];
-
-    const achievements = player.achievements || [];
+    // STATISTICS
 
     document.getElementById("completedCases").textContent =
-        completed.length;
+        dashboardPlayer.completedCases.length;
 
     document.getElementById("evidenceCount").textContent =
-        evidence.length;
+        dashboardPlayer.collectedEvidence.length;
 
     document.getElementById("achievementCount").textContent =
-        achievements.length;
+        dashboardPlayer.achievements.length;
 
     document.getElementById("evidencePreviewCount").textContent =
-        evidence.length;
+        dashboardPlayer.collectedEvidence.length;
 
+    // GAME CONTENT
 
-    // LOAD ACTIVITIES
+    renderMissions();
 
-    loadActivities(player.activities || []);
+    loadActivities();
 
-
-    // LOAD ACHIEVEMENTS
-
-    loadAchievements(achievements);
+    loadAchievements();
 
 }
 
@@ -134,32 +123,147 @@ function getRank(level) {
 }
 
 
-// ACTIVITY SYSTEM
+// DYNAMIC MISSION CARDS
 
-function loadActivities(activities) {
+function renderMissions() {
+
+    const container = document.getElementById("missionGrid");
+
+    container.replaceChildren();
+
+    const unlocked = dashboardPlayer.unlockedCases || [];
+
+    const completed = dashboardPlayer.completedCases || [];
+
+    CASES.forEach(item => {
+
+        const isUnlocked = unlocked.includes(item.id);
+
+        const isCompleted = completed.includes(item.id);
+
+        const card = document.createElement("article");
+
+        card.className = "mission-card";
+
+        const top = document.createElement("div");
+
+        top.className = "mission-top";
+
+        const number = document.createElement("span");
+
+        number.className = "case-number";
+
+        number.textContent = `CASE ${item.number}`;
+
+        const difficulty = document.createElement("span");
+
+        difficulty.className = "difficulty";
+
+        difficulty.textContent = item.difficulty;
+
+        difficulty.classList.add(
+            item.difficulty === "BEGINNER"
+                ? "easy"
+                : "medium"
+        );
+
+        top.append(number, difficulty);
+
+        const symbol = document.createElement("div");
+
+        symbol.className = "mission-symbol cyan-symbol";
+
+        symbol.textContent = "◈";
+
+        const title = document.createElement("h3");
+
+        title.textContent = item.title;
+
+        const description = document.createElement("p");
+
+        description.textContent = item.description;
+
+        const footer = document.createElement("div");
+
+        footer.className = "mission-footer";
+
+        const reward = document.createElement("span");
+
+        reward.textContent = `REWARD: ${item.reward} XP`;
+
+        const button = document.createElement("button");
+
+        button.className = "mission-button";
+
+        if (isCompleted) {
+
+            button.textContent = "COMPLETED ✓";
+
+            button.addEventListener("click", () => {
+
+                window.location.href =
+                    `case.html?case=${item.id}`;
+
+            });
+
+        } else if (isUnlocked) {
+
+            button.textContent = "START →";
+
+            button.addEventListener("click", () => {
+
+                window.location.href =
+                    `case.html?case=${item.id}`;
+
+            });
+
+        } else {
+
+            button.textContent = "LOCKED";
+
+            button.disabled = true;
+
+        }
+
+        footer.append(reward, button);
+
+        card.append(
+            top,
+            symbol,
+            title,
+            description,
+            footer
+        );
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+// RECENT ACTIVITIES
+
+function loadActivities() {
 
     const container = document.getElementById("activityList");
 
     container.replaceChildren();
 
-    if (activities.length === 0) {
+    const activities = dashboardPlayer.activities || [];
 
-        const empty = document.createElement("p");
+    if (!activities.length) {
 
-        empty.className = "empty-state";
-
-        empty.textContent =
-            "No investigation activities yet. Start your first mission!";
-
-        container.appendChild(empty);
+        showEmpty(
+            container,
+            "No investigation activities yet."
+        );
 
         return;
 
     }
 
-    const recent = [...activities].reverse().slice(0, 5);
-
-    recent.forEach(activity => {
+    [...activities].reverse().slice(0, 5).forEach(activity => {
 
         const item = document.createElement("div");
 
@@ -198,24 +302,22 @@ function loadActivities(activities) {
 }
 
 
-// ACHIEVEMENT SYSTEM
+// ACHIEVEMENTS
 
-function loadAchievements(achievements) {
+function loadAchievements() {
 
     const container = document.getElementById("achievementList");
 
     container.replaceChildren();
 
-    if (achievements.length === 0) {
+    const achievements = dashboardPlayer.achievements || [];
 
-        const empty = document.createElement("p");
+    if (!achievements.length) {
 
-        empty.className = "empty-state";
-
-        empty.textContent =
-            "No achievements unlocked yet. Complete missions to earn rewards!";
-
-        container.appendChild(empty);
+        showEmpty(
+            container,
+            "Complete your first investigation to unlock an achievement."
+        );
 
         return;
 
@@ -246,7 +348,7 @@ function loadAchievements(achievements) {
 
         description.textContent =
             typeof achievement === "string"
-                ? "Achievement unlocked"
+                ? "Achievement unlocked."
                 : achievement.description;
 
         details.append(title, description);
@@ -260,43 +362,32 @@ function loadAchievements(achievements) {
 }
 
 
+// EMPTY STATE
+
+function showEmpty(container, message) {
+
+    const element = document.createElement("p");
+
+    element.className = "empty-state";
+
+    element.textContent = message;
+
+    container.appendChild(element);
+
+}
+
+
 // LOGOUT
 
 document.getElementById("logoutBtn").addEventListener("click", () => {
 
-    const confirmLogout = confirm(
-        "Are you sure you want to logout?"
-    );
-
-    if (confirmLogout) {
+    if (confirm("Are you sure you want to logout?")) {
 
         Storage.logout();
 
         window.location.replace("index.html");
 
     }
-
-});
-
-
-// MISSION BUTTON
-
-document.querySelectorAll(".mission-button[data-case]").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const caseID = button.dataset.case;
-
-        if (caseID === "case001") {
-
-            alert(
-                "CASE 001: The Missing Identity\n\n" +
-                "Your investigation module will be developed in Phase 04."
-            );
-
-        }
-
-    });
 
 });
 
