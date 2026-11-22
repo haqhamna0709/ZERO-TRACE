@@ -1,0 +1,32 @@
+
+@media (max-width: 520px) {
+
+    .auth-wrapper {
+        padding: 20px 14px;
+    }
+
+    .auth-card {
+        padding: 30px 22px;
+    }
+
+    .brand h1 {
+        font-size: 24px;
+    }
+
+    .heading h2 {
+        font-size: 18px;
+    }
+
+    .side-caption {
+        display: none;
+    }
+
+}
+
+@media (max-height: 650px) {
+
+    .auth-wrapper {
+        align-items: flex-start;
+    }
+
+}

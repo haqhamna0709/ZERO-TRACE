@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ZERO TRACE | Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <main class="dashboard-container">
+
+        <header class="topbar">
+
+            <h1>ZERO<span>TRACE</span>_</h1>
+
+            <button id="logoutBtn">LOGOUT ↗</button>
+
+        </header>
+
+        <section class="welcome-card">
+
+            <p class="system-label">
+                INVESTIGATION CONTROL CENTER
+            </p>
+
+            <h2>
+                Welcome, <span id="playerName">Investigator</span>
+            </h2>
+
+            <p>Your investigation journey starts here.</p>
+
+        </section>
+
+        <section class="stats-grid">
+
+            <article class="stat-card">
+                <p>PLAYER LEVEL</p>
+                <h3 id="playerLevel">01</h3>
+            </article>
+
+            <article class="stat-card">
+                <p>TOTAL XP</p>
+                <h3 id="playerXP">0</h3>
+            </article>
+
+            <article class="stat-card">
+                <p>CASES COMPLETED</p>
+                <h3 id="completedCases">0</h3>
+            </article>
+
+        </section>
+
+        <section class="mission-card">
+
+            <h2>YOUR FIRST MISSION</h2>
+
+            <p>CASE 001 — THE MISSING IDENTITY</p>
+
+            <p class="mission-description">
+                Your first investigation awaits.
+                Analyze the fictional evidence and solve the case.
+            </p>
+
+            <button id="startMission">
+                START INVESTIGATION →
+            </button>
+
+        </section>
+
+        <footer>
+            ZERO TRACE © 2026 | INVESTIGATION SYSTEM
+        </footer>
+
+    </main>
+
+    <script src="storage.js"></script>
+    <script src="dashboard.js"></script>
+
+</body>
+</html>

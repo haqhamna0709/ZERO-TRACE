@@ -1,75 +1,176 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZERO TRACE | Investigation System</title>
+
+    <meta name="description" content="ZERO TRACE - Digital Investigation Game">
+
+    <title>ZERO TRACE | Access Terminal</title>
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="responsive.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <main class="login-container">
+    <div class="background-grid"></div>
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
 
-        <section class="login-card">
+    <main class="auth-wrapper">
 
-            <div class="logo">
-                ZERO<span>TRACE</span><small>_</small>
+        <section class="auth-card">
+
+            <div class="brand">
+                <div class="brand-icon">Z</div>
+                <h1>ZERO<span>TRACE</span><small>_</small></h1>
+                <p>DIGITAL INVESTIGATION SYSTEM</p>
             </div>
 
-            <p class="system-label">
-                DIGITAL INVESTIGATION SYSTEM
-            </p>
+            <div class="system-status">
+                <span class="status-dot"></span>
+                SYSTEM ONLINE
+            </div>
 
-            <h1>Welcome Back, Investigator</h1>
+            <!-- LOGIN FORM -->
 
-            <p class="subtitle">
-                Access your investigation dashboard.
-            </p>
+            <div id="loginSection">
 
-            <form id="loginForm">
+                <div class="heading">
+                    <h2>Welcome Back, Investigator</h2>
+                    <p>Enter your credentials to access the system.</p>
+                </div>
 
-                <label>Username</label>
-                <input
-                    type="text"
-                    id="username"
-                    placeholder="Enter username"
-                    required
-                >
+                <form id="loginForm">
 
-                <label>Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter password"
-                    required
-                >
+                    <div class="form-group">
+                        <label for="loginUsername">USERNAME</label>
 
-                <button type="submit">
-                    ACCESS SYSTEM →
-                </button>
+                        <input
+                            type="text"
+                            id="loginUsername"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
 
-            </form>
+                    <div class="form-group">
+                        <label for="loginPassword">PASSWORD</label>
 
-            <p id="message"></p>
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+                    </div>
 
-            <p class="register-text">
-                New investigator?
-                <a href="#" id="showRegister">Create Account</a>
-            </p>
+                    <button type="submit" class="primary-btn">
+                        ACCESS SYSTEM <span>→</span>
+                    </button>
 
-            <p class="footer-text">
-                ZERO TRACE © 2026 | ALL SYSTEMS SIMULATED
-            </p>
+                </form>
+
+                <p class="switch-text">
+                    New investigator?
+                    <button type="button" id="showRegister">
+                        Create Account
+                    </button>
+                </p>
+
+            </div>
+
+            <!-- REGISTRATION FORM -->
+
+            <div id="registerSection" class="hidden">
+
+                <div class="heading">
+                    <h2>Create Investigator ID</h2>
+                    <p>Register to begin your investigation journey.</p>
+                </div>
+
+                <form id="registerForm">
+
+                    <div class="form-group">
+                        <label for="registerUsername">USERNAME</label>
+
+                        <input
+                            type="text"
+                            id="registerUsername"
+                            placeholder="Choose a username"
+                            minlength="3"
+                            maxlength="20"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerPassword">PASSWORD</label>
+
+                        <input
+                            type="password"
+                            id="registerPassword"
+                            placeholder="Create a password"
+                            minlength="6"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">CONFIRM PASSWORD</label>
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            minlength="6"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="primary-btn">
+                        CREATE ACCOUNT <span>→</span>
+                    </button>
+
+                </form>
+
+                <p class="switch-text">
+                    Already registered?
+                    <button type="button" id="showLogin">
+                        Login Here
+                    </button>
+                </p>
+
+            </div>
+
+            <p id="message" role="status" aria-live="polite"></p>
+
+            <div class="auth-footer">
+                <span>ZERO TRACE © 2026</span>
+                <span>VERSION 1.0.0</span>
+            </div>
 
         </section>
 
+        <div class="side-caption">
+            <span>01</span> // ACCESS TERMINAL
+        </div>
+
     </main>
 
-    <script src="js/storage.js"></script>
-    <script src="js/auth.js"></script>
+    <script src="storage.js"></script>
+    <script src="auth.js"></script>
 
 </body>
 </html>

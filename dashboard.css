@@ -1,0 +1,162 @@
+
+.dashboard-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px 25px;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #263247;
+}
+
+.topbar h1 {
+    font-family: var(--font-tech);
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+
+.topbar h1 span {
+    color: var(--cyan);
+}
+
+.topbar button {
+    padding: 11px 18px;
+
+    background: transparent;
+    color: var(--cyan);
+
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.welcome-card {
+    margin-top: 40px;
+    padding: 35px;
+
+    background: linear-gradient(
+        120deg,
+        #112B3D,
+        #15142B
+    );
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.system-label {
+    color: var(--cyan);
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+.welcome-card h2 {
+    font-size: 27px;
+    margin-bottom: 12px;
+}
+
+.welcome-card h2 span {
+    color: var(--cyan);
+}
+
+.welcome-card p:last-child {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+
+    margin-top: 25px;
+}
+
+.stat-card {
+    padding: 25px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.stat-card p {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.stat-card h3 {
+    margin-top: 15px;
+
+    color: var(--cyan);
+
+    font-family: var(--font-tech);
+    font-size: 28px;
+}
+
+.mission-card {
+    margin-top: 30px;
+    padding: 30px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.mission-card h2 {
+    color: var(--cyan);
+    font-family: var(--font-tech);
+    font-size: 17px;
+    margin-bottom: 20px;
+}
+
+.mission-card > p:first-of-type {
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.mission-description {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.mission-card button {
+    margin-top: 25px;
+    padding: 14px 20px;
+
+    background: var(--cyan);
+    color: var(--background);
+
+    border: none;
+    border-radius: 6px;
+    font-weight: 800;
+}
+
+.dashboard-container footer {
+    margin-top: 60px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+@media (max-width: 650px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome-card {
+        padding: 25px;
+    }
+
+    .welcome-card h2 {
+        font-size: 21px;
+    }
+}

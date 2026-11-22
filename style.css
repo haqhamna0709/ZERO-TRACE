@@ -1,0 +1,98 @@
+
+:root {
+    --background: #070B14;
+    --surface: #101827;
+    --surface-light: #172337;
+
+    --cyan: #36D9FF;
+    --purple: #A78BFA;
+
+    --white: #F3F6FF;
+    --muted: #8293AC;
+    --border: rgba(54, 217, 255, 0.18);
+
+    --font-main: 'Inter', sans-serif;
+    --font-tech: 'Orbitron', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--background);
+    color: var(--white);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: var(--cyan);
+    text-decoration: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.background-grid {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(rgba(54,217,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(54,217,255,0.035) 1px, transparent 1px);
+
+    background-size: 45px 45px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 95%
+    );
+}
+
+.glow {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+.glow-one {
+    background: var(--cyan);
+    top: -120px;
+    left: -100px;
+}
+
+.glow-two {
+    background: var(--purple);
+    bottom: -120px;
+    right: -100px;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+}
