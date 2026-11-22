@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ZERO TRACE | Evidence Archive</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="evidence.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="evidence-body">
+
+    <main class="evidence-container">
+
+        <!-- HEADER -->
+
+        <header class="evidence-header">
+
+            <a href="dashboard.html" class="evidence-logo">
+                ZERO<span>TRACE</span>_
+            </a>
+
+            <div class="evidence-user">
+
+                <span id="archiveUsername">INVESTIGATOR</span>
+
+                <a href="dashboard.html" class="archive-back">
+                    ← DASHBOARD
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE TITLE -->
+
+        <section class="archive-hero">
+
+            <p class="archive-label">
+                DIGITAL FORENSICS / EVIDENCE MANAGEMENT
+            </p>
+
+            <h1>EVIDENCE ARCHIVE</h1>
+
+            <p>
+                Review recovered records, compare investigation clues
+                and organize your digital investigation notes.
+            </p>
+
+        </section>
+
+
+        <!-- STATISTICS -->
+
+        <section class="evidence-stats">
+
+            <article class="evidence-stat">
+
+                <span>TOTAL RECORDS</span>
+
+                <h2 id="totalEvidence">0</h2>
+
+            </article>
+
+            <article class="evidence-stat">
+
+                <span>COLLECTED</span>
+
+                <h2 id="collectedEvidence">0</h2>
+
+            </article>
+
+            <article class="evidence-stat">
+
+                <span>REMAINING</span>
+
+                <h2 id="remainingEvidence">0</h2>
+
+            </article>
+
+        </section>
+
+
+        <!-- SEARCH AND FILTER -->
+
+        <section class="archive-toolbar">
+
+            <input
+                type="search"
+                id="evidenceSearch"
+                placeholder="Search evidence records..."
+            >
+
+            <select id="caseFilter">
+
+                <option value="all">All Investigations</option>
+
+                <option value="case001">Case 001</option>
+
+                <option value="case002">Case 002</option>
+
+                <option value="case003">Case 003</option>
+
+                <option value="case004">Case 004</option>
+
+                <option value="case005">Case 005</option>
+
+                <option value="case006">Case 006</option>
+
+            </select>
+
+        </section>
+
+
+        <!-- MAIN CONTENT -->
+
+        <section class="archive-layout">
+
+            <div class="archive-main">
+
+                <div class="archive-heading">
+
+                    <h2>RECOVERED RECORDS</h2>
+
+                    <span id="recordCount">0 RECORDS</span>
+
+                </div>
+
+                <div id="evidenceGrid" class="evidence-grid"></div>
+
+            </div>
+
+
+            <!-- DETAILS PANEL -->
+
+            <aside class="evidence-details">
+
+                <div class="details-heading">
+                    RECORD INSPECTOR
+                </div>
+
+                <div id="evidenceDetails">
+
+                    <div class="details-placeholder">
+
+                        <div class="details-symbol">⌕</div>
+
+                        <h3>NO RECORD SELECTED</h3>
+
+                        <p>
+                            Select a recovered evidence record
+                            to inspect its details.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- COMPARISON BOARD -->
+
+        <section class="comparison-section">
+
+            <div class="comparison-heading">
+
+                <div>
+                    <p>INVESTIGATION TOOL</p>
+                    <h2>EVIDENCE COMPARISON BOARD</h2>
+                </div>
+
+                <span>MAX 2 RECORDS</span>
+
+            </div>
+
+            <p class="comparison-description">
+                Select two collected records to compare their information.
+            </p>
+
+            <div id="comparisonSelection" class="comparison-selection">
+
+                <div class="comparison-slot">
+                    SELECT RECORD 01
+                </div>
+
+                <div class="comparison-slot">
+                    SELECT RECORD 02
+                </div>
+
+            </div>
+
+            <button id="compareButton" disabled>
+                COMPARE EVIDENCE →
+            </button>
+
+            <div id="comparisonResult" class="comparison-result"></div>
+
+        </section>
+
+
+        <!-- INVESTIGATION NOTES -->
+
+        <section class="notes-section">
+
+            <div class="comparison-heading">
+
+                <div>
+                    <p>PERSONAL WORKSPACE</p>
+                    <h2>INVESTIGATION NOTES</h2>
+                </div>
+
+            </div>
+
+            <textarea
+                id="investigationNotes"
+                placeholder="Write your investigation observations here..."
+                rows="6"
+            ></textarea>
+
+            <div class="notes-footer">
+
+                <span id="notesStatus">Notes are stored locally.</span>
+
+                <button id="saveNotes">
+                    SAVE NOTES
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <footer class="evidence-footer">
+
+            ZERO TRACE © 2026 | DIGITAL EVIDENCE MANAGEMENT SYSTEM
+
+        </footer>
+
+    </main>
+
+
+    <script src="storage.js"></script>
+    <script src="cases.js"></script>
+    <script src="evidence.js"></script>
+
+</body>
+
+</html>
